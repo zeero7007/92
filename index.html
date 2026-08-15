@@ -1,0 +1,344 @@
+<title>92村会 大会ポスター</title>
+<style>
+  :root{
+    /* 昭和プロレス興行ポスター：墨・燃赤・金・生成 */
+    --sumi:#0B0A09;
+    --sumi-2:#141110;
+    --aka:#C8102E;
+    --aka-dark:#7A0C1D;
+    --kin:#D8A63A;
+    --kin-2:#F0CE7A;
+    --kinari:#EFE7D6;
+    --kinari-dim:#B7AC97;
+    --sen:rgba(239,231,214,.16);
+
+    --display:"Hiragino Sans","ヒラギノ角ゴシック","Yu Gothic UI","Yu Gothic","游ゴシック体","Meiryo",sans-serif;
+    --mincho:"Hiragino Mincho ProN","ヒラギノ明朝 ProN","Yu Mincho","游明朝",serif;
+    --mono:ui-monospace,"SFMono-Regular","Menlo",monospace;
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    background:var(--sumi);
+    color:var(--kinari);
+    font-family:var(--display);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    /* 紙の目 */
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(200,16,46,.18), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.014) 0 1px, transparent 1px 3px);
+  }
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px 96px}
+
+  /* ── 幕（ヘッダー帯） ── */
+  .maku{
+    background:var(--aka);
+    background-image:repeating-linear-gradient(115deg,rgba(0,0,0,.22) 0 14px,transparent 14px 28px);
+    border-bottom:3px solid var(--kin);
+    padding:9px 0;
+    overflow:hidden;
+  }
+  .maku-in{
+    display:flex;gap:3.5rem;white-space:nowrap;
+    font-size:.78rem;font-weight:800;letter-spacing:.34em;
+    animation:nagare 26s linear infinite;
+  }
+  .maku-in span{flex:none}
+  @keyframes nagare{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.maku-in{animation:none}}
+
+  /* ── 大会告知 ── */
+  .kokuchi{padding:64px 0 40px;text-align:center;position:relative}
+  .eyebrow{
+    font-size:.72rem;letter-spacing:.5em;color:var(--kin);
+    font-weight:800;margin:0 0 26px;text-indent:.5em;
+  }
+  .kanmuri{
+    font-family:var(--mincho);
+    font-size:clamp(.86rem,2.4vw,1.05rem);
+    letter-spacing:.42em;color:var(--kinari-dim);
+    margin:0 0 10px;text-indent:.42em;
+  }
+  h1{
+    margin:0;
+    font-size:clamp(4.6rem,20vw,13rem);
+    font-weight:900;
+    line-height:.82;
+    letter-spacing:-.02em;
+    transform:scaleY(1.18);
+    transform-origin:center;
+    color:var(--kinari);
+    text-shadow:
+      4px 4px 0 var(--aka-dark),
+      8px 8px 0 rgba(0,0,0,.55);
+    text-wrap:balance;
+  }
+  .h1-pad{padding:.14em 0 .2em}
+  .sub{
+    margin:26px 0 0;font-family:var(--mincho);
+    font-size:clamp(.95rem,2.6vw,1.2rem);letter-spacing:.2em;color:var(--kin-2);
+  }
+
+  /* 日時の札 */
+  .fuda{
+    margin:38px auto 0;display:inline-flex;align-items:stretch;
+    border:2px solid var(--kin);background:rgba(0,0,0,.4);
+  }
+  .fuda>div{padding:14px 22px}
+  .fuda>div+div{border-left:2px solid var(--kin)}
+  .fuda b{
+    display:block;font-family:var(--mono);font-variant-numeric:tabular-nums;
+    font-size:clamp(1.6rem,5vw,2.4rem);line-height:1;font-weight:700;color:var(--kinari);
+  }
+  .fuda small{display:block;margin-top:7px;font-size:.66rem;letter-spacing:.32em;color:var(--kin)}
+
+  /* 残り時間 */
+  .nokori{
+    margin:22px 0 0;font-family:var(--mono);font-variant-numeric:tabular-nums;
+    font-size:.82rem;letter-spacing:.18em;color:var(--kinari-dim);
+  }
+  .nokori span{color:var(--aka);font-weight:700}
+
+  /* ── 見出し ── */
+  .midashi{
+    display:flex;align-items:center;gap:16px;margin:76px 0 30px;
+  }
+  .midashi h2{
+    margin:0;font-size:clamp(1.35rem,4vw,2rem);font-weight:900;
+    letter-spacing:.16em;color:var(--kinari);white-space:nowrap;
+  }
+  .midashi .en{
+    font-family:var(--mono);font-size:.66rem;letter-spacing:.3em;color:var(--kin);
+    padding-bottom:.35em;
+  }
+  .midashi::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--kin),transparent)}
+
+  /* ── 選手カード ── */
+  .card-list{
+    display:grid;gap:12px;
+    grid-template-columns:repeat(auto-fill,minmax(272px,1fr));
+    list-style:none;padding:0;margin:0;
+  }
+  .senshu{
+    position:relative;display:flex;align-items:center;gap:16px;
+    padding:16px 18px 16px 14px;
+    background:linear-gradient(100deg,var(--sumi-2),rgba(20,17,16,.4));
+    border:1px solid var(--sen);
+    border-left:4px solid var(--aka);
+    transition:transform .18s ease,border-color .18s ease,background .18s ease;
+  }
+  .senshu:hover,.senshu:focus-within{
+    transform:translateX(4px);
+    border-left-color:var(--kin);
+    background:linear-gradient(100deg,rgba(200,16,46,.14),rgba(20,17,16,.4));
+  }
+  .no{
+    font-family:var(--mono);font-variant-numeric:tabular-nums;
+    font-size:1.6rem;font-weight:700;color:var(--kin);
+    opacity:.55;line-height:1;min-width:2.1ch;text-align:right;
+  }
+  .na{display:flex;flex-direction:column;gap:5px;min-width:0}
+  .futatsuna{
+    font-family:var(--mincho);font-size:.72rem;letter-spacing:.16em;
+    color:var(--aka);
+  }
+  .senshu:hover .futatsuna{color:var(--kin-2)}
+  .shimei{
+    font-size:1.5rem;font-weight:900;letter-spacing:.12em;line-height:1;
+  }
+  .waza{font-size:.68rem;letter-spacing:.1em;color:var(--kinari-dim)}
+
+  /* ── 特別協賛（天寶一） ── */
+  .sake{
+    margin-top:14px;
+    border:2px solid var(--kin);
+    background:
+      linear-gradient(180deg,rgba(216,166,58,.09),transparent 45%),
+      var(--sumi-2);
+    padding:clamp(26px,5vw,46px);
+    display:grid;gap:clamp(24px,4vw,44px);
+    grid-template-columns:minmax(0,1fr);
+    align-items:center;
+  }
+  @media (min-width:760px){.sake{grid-template-columns:200px minmax(0,1fr)}}
+
+  /* 一升瓶ラベル風 */
+  .label{
+    justify-self:center;width:180px;padding:26px 10px;
+    background:var(--kinari);color:var(--sumi);
+    border:1px solid rgba(0,0,0,.3);
+    box-shadow:0 14px 34px rgba(0,0,0,.55);
+    text-align:center;
+    transform:rotate(-2.2deg);
+  }
+  .label .kura{font-family:var(--mincho);font-size:.6rem;letter-spacing:.34em;color:#6b5a3a}
+  .label .mei{
+    font-family:var(--mincho);font-weight:700;
+    font-size:3.1rem;line-height:1.02;letter-spacing:.06em;margin:14px 0;
+    writing-mode:vertical-rl;display:inline-block;height:5.2em;
+  }
+  .label .shu{font-family:var(--mincho);font-size:.64rem;letter-spacing:.3em;color:#6b5a3a}
+
+  .sake h3{margin:0 0 14px;font-size:clamp(1.4rem,4vw,1.9rem);letter-spacing:.14em;font-weight:900}
+  .sake p{
+    margin:0;font-family:var(--mincho);line-height:2;font-size:.98rem;
+    color:var(--kinari);max-width:62ch;
+  }
+  .sake .tag{
+    display:inline-block;margin:0 0 16px;padding:5px 12px;
+    background:var(--aka);color:var(--kinari);
+    font-size:.66rem;letter-spacing:.3em;font-weight:800;
+  }
+
+  /* ── 大会要項 ── */
+  .youkou{width:100%;border-collapse:collapse;font-size:.95rem}
+  .youkou th,.youkou td{
+    text-align:left;padding:15px 12px;border-bottom:1px solid var(--sen);vertical-align:top;
+  }
+  .youkou th{
+    width:8.5em;font-size:.72rem;letter-spacing:.28em;color:var(--kin);font-weight:800;
+    white-space:nowrap;
+  }
+  .youkou td{font-family:var(--mincho);letter-spacing:.06em}
+  .scroll{overflow-x:auto}
+
+  /* ── 締め ── */
+  .shime{
+    margin-top:80px;padding:44px 20px;text-align:center;
+    border-top:3px double var(--kin);
+  }
+  .shime p{
+    margin:0;font-family:var(--mincho);font-size:clamp(1.1rem,3.6vw,1.6rem);
+    letter-spacing:.3em;color:var(--kin-2);text-indent:.3em;
+  }
+  .shime small{
+    display:block;margin-top:18px;font-family:var(--mono);
+    font-size:.66rem;letter-spacing:.28em;color:var(--kinari-dim);
+  }
+
+  :focus-visible{outline:2px solid var(--kin);outline-offset:3px}
+</style>
+
+<div class="maku" aria-hidden="true">
+  <div class="maku-in">
+    <span>9.12 SAT 18:00 開戦 ── 全11選手出場 ── 特別協賛 日本酒 天寶一 ── 遅刻は反則負け</span>
+    <span>9.12 SAT 18:00 開戦 ── 全11選手出場 ── 特別協賛 日本酒 天寶一 ── 遅刻は反則負け</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="kokuchi">
+    <p class="eyebrow">92村 実行委員会 主催</p>
+    <p class="kanmuri">令和八年 秋の陣</p>
+    <h1 class="h1-pad">92村会</h1>
+    <p class="sub">全11選手 出場 ／ 時間無制限一本勝負</p>
+
+    <div class="fuda">
+      <div><b>9.12</b><small>SAT</small></div>
+      <div><b>18:00</b><small>開戦</small></div>
+      <div><b>11</b><small>選手</small></div>
+    </div>
+
+    <p class="nokori" id="nokori">開戦まで <span>――</span></p>
+  </header>
+
+  <section>
+    <div class="midashi">
+      <h2>出場選手</h2><span class="en">ENTRY / 11</span>
+    </div>
+    <ol class="card-list" id="roster"></ol>
+  </section>
+
+  <section>
+    <div class="midashi">
+      <h2>特別協賛</h2><span class="en">OFFICIAL SAKE</span>
+    </div>
+    <div class="sake">
+      <div class="label">
+        <div class="kura">広島県福山市</div>
+        <div class="mei">天寶一</div>
+        <div class="shu">日 本 酒</div>
+      </div>
+      <div>
+        <span class="tag">特別調印</span>
+        <h3>本大会公式酒「天寶一」用意いたしました</h3>
+        <p>
+          広島・福山の蔵、天寶一。料理と刺し違える辛口の芯と、後を引かないキレ。
+          第一試合のゴングと同時に開栓、以降は各自の裁量に委ねる。
+          注ぎ合いは推奨、手酌も反則ではない。ただし空になった徳利を放置した者は、
+          その場で場外カウントを数えるものとする。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="midashi">
+      <h2>大会要項</h2><span class="en">CARD INFO</span>
+    </div>
+    <div class="scroll">
+      <table class="youkou">
+        <tbody>
+          <tr><th>大会名</th><td>92村会 令和八年 秋の陣</td></tr>
+          <tr><th>開戦</th><td>9月12日（土）18時00分 ゴング</td></tr>
+          <tr><th>出場</th><td>長川・国村・河上・小塚・加藤・井亀・井亀弟・和田・猪原・利重・藤原 ／ 全11選手</td></tr>
+          <tr><th>公式酒</th><td>日本酒「天寶一」（広島県福山市）ほか、各自持ち込み自由</td></tr>
+          <tr><th>ルール</th><td>時間無制限一本勝負。乾杯までの私語は自由、乾杯後の説教は反則。</td></tr>
+          <tr><th>反則</th><td>無断欠場・大幅遅刻・一次会での戦線離脱（ただし翌朝が早い者は不問）</td></tr>
+          <tr><th>会場</th><td>追って通達。決定次第、本ページを更新する。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="shime">
+    <p>いざ、九月十二日。</p>
+    <small>92 VILLAGE ASSEMBLY / AUTUMN 2026</small>
+  </div>
+</div>
+
+<script>
+  const senshu = [
+    ["村の総帥",        "長川",   "必殺：一次会完全掌握"],
+    ["不動のセコンド",  "国村",   "必殺：静かなる追い酒"],
+    ["流水の使い手",    "河上",   "必殺：リバーサイド・ハイボール"],
+    ["技巧派スープレックス","小塚","必殺：塚落とし"],
+    ["加速する重戦車",  "加藤",   "必殺：カトウ・ラリアット"],
+    ["兄弟タッグ 兄",   "井亀",   "必殺：亀甲式ロック"],
+    ["兄弟タッグ 弟",   "井亀弟", "必殺：弟固め"],
+    ["和をもって制す",  "和田",   "必殺：円満フィニッシュ"],
+    ["猪突の突進者",    "猪原",   "必殺：イノハラ・タックル"],
+    ["重ねる利のプロ",  "利重",   "必殺：おかわり永久機関"],
+    ["最後の砦",        "藤原",   "必殺：締めのラーメン固め"],
+  ];
+
+  document.getElementById("roster").innerHTML = senshu.map(([n, s, w], i) => `
+    <li class="senshu" tabindex="0">
+      <div class="no">${String(i + 1).padStart(2, "0")}</div>
+      <div class="na">
+        <div class="futatsuna">${n}</div>
+        <div class="shimei">${s}</div>
+        <div class="waza">${w}</div>
+      </div>
+    </li>`).join("");
+
+  // 開戦まで（日本時間 2026-09-12 18:00）
+  const gong = new Date("2026-09-12T18:00:00+09:00");
+  const el = document.getElementById("nokori");
+  function tick() {
+    const d = gong - new Date();
+    if (d <= 0) { el.innerHTML = "<span>試合開始</span>"; return; }
+    const day = Math.floor(d / 864e5),
+          h   = Math.floor(d / 36e5) % 24,
+          m   = Math.floor(d / 6e4) % 60,
+          s   = Math.floor(d / 1e3) % 60;
+    el.innerHTML = `開戦まで <span>${day}日 ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}</span>`;
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
