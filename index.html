@@ -218,6 +218,56 @@
   .youkou td{font-family:var(--mincho);letter-spacing:.06em}
   .scroll{overflow-x:auto}
 
+  /* ── おつまみ調印 ── */
+  .request{
+    border:1px solid var(--sen);border-top:3px solid var(--aka);
+    background:var(--sumi-2);
+    padding:clamp(24px,4.5vw,40px);
+    display:flex;flex-direction:column;gap:20px;
+  }
+  .request .lead{
+    margin:0;font-family:var(--mincho);font-size:1rem;line-height:1.9;
+    color:var(--kinari);max-width:56ch;
+  }
+  .request label{display:flex;flex-direction:column;gap:8px}
+  .request label>span{
+    font-size:.68rem;letter-spacing:.28em;color:var(--kin);font-weight:800;
+  }
+  .request select,.request input,.request textarea{
+    width:100%;padding:13px 14px;
+    background:rgba(0,0,0,.45);
+    border:1px solid var(--sen);
+    color:var(--kinari);
+    font-family:var(--display);font-size:1rem;
+    border-radius:0;-webkit-appearance:none;appearance:none;
+  }
+  .request select{
+    background-image:linear-gradient(45deg,transparent 50%,var(--kin) 50%),
+                     linear-gradient(135deg,var(--kin) 50%,transparent 50%);
+    background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;
+    background-size:6px 6px,6px 6px;
+    background-repeat:no-repeat;
+    padding-right:42px;
+  }
+  .request textarea{font-family:var(--mincho);line-height:1.7;resize:vertical}
+  .request select:focus,.request input:focus,.request textarea:focus{
+    border-color:var(--kin);outline:none;background-color:rgba(0,0,0,.7);
+  }
+  .request ::placeholder{color:rgba(183,172,151,.55)}
+  .request button{
+    margin-top:4px;padding:17px;border:none;cursor:pointer;
+    background:var(--aka);color:var(--kinari);
+    font-family:var(--display);font-size:1.05rem;font-weight:900;letter-spacing:.24em;
+    text-indent:.24em;
+    transition:background .18s ease,transform .12s ease;
+  }
+  .request button:hover{background:var(--kin);color:var(--sumi)}
+  .request button:active{transform:translateY(2px)}
+  .chuui{
+    margin:0;font-size:.74rem;line-height:1.9;color:var(--kinari-dim);letter-spacing:.05em;
+  }
+  .chuui strong{color:var(--kin-2);font-weight:800}
+
   /* ── 締め ── */
   .shime{
     margin-top:80px;padding:44px 20px;text-align:center;
@@ -310,6 +360,40 @@
     </div>
   </section>
 
+  <section>
+    <div class="midashi">
+      <h2>おつまみ調印</h2><span class="en">REQUEST</span>
+    </div>
+    <form class="request" id="req">
+      <p class="lead">
+        食いたいものがある者は、ここに書いて申し出よ。実行委員会が受理する。
+      </p>
+
+      <label>
+        <span>選手名</span>
+        <select name="who" id="who" required></select>
+      </label>
+
+      <label>
+        <span>希望のおつまみ</span>
+        <input type="text" name="what" id="what" required
+               placeholder="例：唐揚げ、刺身の盛り合わせ、砂ずり" autocomplete="off">
+      </label>
+
+      <label>
+        <span>ひとこと（任意）</span>
+        <textarea name="memo" id="memo" rows="3"
+                  placeholder="例：天寶一に合うやつを頼む"></textarea>
+      </label>
+
+      <button type="submit">この内容で申し出る</button>
+      <p class="chuui">
+        送信ボタンを押すとメールアプリが立ち上がります。<strong>そこで送信ボタンを押すと届きます。</strong><br>
+        宛先：info@nakawa.net
+      </p>
+    </form>
+  </section>
+
   <div class="shime">
     <p>いざ、九月十二日。</p>
     <small>92 VILLAGE ASSEMBLY / AUTUMN 2026</small>
@@ -340,6 +424,32 @@
         <div class="waza">${w}</div>
       </div>
     </li>`).join("");
+
+  // おつまみ調印：選手名の選択肢
+  document.getElementById("who").innerHTML =
+    `<option value="" disabled selected>選んでください</option>` +
+    senshu.map(([, s]) => `<option>${s}</option>`).join("") +
+    `<option>その他</option>`;
+
+  // メールアプリを起動して申し出る
+  document.getElementById("req").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const who  = document.getElementById("who").value;
+    const what = document.getElementById("what").value.trim();
+    const memo = document.getElementById("memo").value.trim();
+    const body =
+      `92村会 おつまみリクエスト\n` +
+      `──────────────\n` +
+      `選手名：${who}\n` +
+      `希望のおつまみ：${what}\n` +
+      `ひとこと：${memo || "（なし）"}\n` +
+      `──────────────\n` +
+      `9/12（土）18:00 神辺「バド吉」`;
+    location.href =
+      `mailto:info@nakawa.net` +
+      `?subject=${encodeURIComponent("【92村会】おつまみリクエスト／" + who)}` +
+      `&body=${encodeURIComponent(body)}`;
+  });
 
   // 開戦まで（日本時間 2026-09-12 18:00）
   const gong = new Date("2026-09-12T18:00:00+09:00");
